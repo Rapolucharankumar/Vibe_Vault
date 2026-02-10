@@ -1,26 +1,208 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #0f172a;
+  --foreground: #f1f5f9;
+  --primary: #ec4899;
+  --primary-dark: #be185d;
+  --secondary: #8b5cf6;
+  --accent: #06b6d4;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+* {
+  @apply antialiased;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  @apply bg-slate-950 text-white;
+  font-feature-settings: "rlig" 1, "calt" 1;
+}
+
+/* Smooth scrolling */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Remove default scrollbar for webkit browsers and style it */
+::-webkit-scrollbar {
+  @apply w-2;
+}
+
+::-webkit-scrollbar-track {
+  @apply bg-transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  @apply bg-slate-700 rounded-full;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  @apply bg-slate-600;
+}
+
+/* Focus ring styles */
+:focus-visible {
+  @apply outline-none ring-2 ring-pink-500 ring-offset-2 ring-offset-slate-950;
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(1rem);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-1rem);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-1rem);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes slideInRight {
+  from {
+    opacity: 0;
+    transform: translateX(1rem);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes pulse-soft {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.75;
+  }
+}
+
+@keyframes glow {
+  0%, 100% {
+    box-shadow: 0 10px 30px -5px rgba(236, 72, 153, 0.5);
+  }
+  50% {
+    box-shadow: 0 20px 40px -5px rgba(236, 72, 153, 0.75);
+  }
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: -1000px 0;
+  }
+  100% {
+    background-position: 1000px 0;
+  }
+}
+
+@layer utilities {
+  .animate-fadeIn {
+    animation: fadeIn 300ms ease-out;
+  }
+
+  .animate-slideUp {
+    animation: slideUp 400ms ease-out;
+  }
+
+  .animate-slideDown {
+    animation: slideDown 400ms ease-out;
+  }
+
+  .animate-slideInLeft {
+    animation: slideInLeft 400ms ease-out;
+  }
+
+  .animate-slideInRight {
+    animation: slideInRight 400ms ease-out;
+  }
+
+  .animate-pulse-soft {
+    animation: pulse-soft 2s ease-in-out infinite;
+  }
+
+  .animate-glow {
+    animation: glow 2s ease-in-out infinite;
+  }
+
+  .animate-shimmer {
+    animation: shimmer 2s infinite;
+    background: linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.1) 50%, transparent 100%);
+    background-size: 1000px 100%;
+  }
+
+  /* Glass morphism */
+  .glass {
+    @apply bg-white/10 backdrop-blur-xl border border-white/20;
+  }
+
+  /* Gradient text */
+  .gradient-text {
+    @apply bg-gradient-to-r from-pink-400 via-purple-400 to-cyan-400 bg-clip-text text-transparent;
+  }
+
+  /* Smooth transition for all interactive elements */
+  .transition-smooth {
+    @apply transition-all duration-300 ease-out;
+  }
+
+  /* High contrast card styles */
+  .card-dark {
+    @apply bg-slate-900 border border-slate-700 text-white;
+  }
+
+  .card-light {
+    @apply bg-white/95 border border-slate-200 text-slate-900;
+  }
+
+  /* Text contrast improvements */
+  .text-primary {
+    @apply text-white;
+  }
+
+  .text-secondary {
+    @apply text-slate-100;
+  }
+
+  .text-tertiary {
+    @apply text-slate-300;
+  }
+
+  .bg-surface {
+    @apply bg-slate-800;
+  }
+
+  .bg-surface-light {
+    @apply bg-slate-700;
+  }
 }
